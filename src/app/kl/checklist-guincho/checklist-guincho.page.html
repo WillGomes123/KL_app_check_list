@@ -1,0 +1,479 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/kl_guincho"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Fazer Guincho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!--(ngSubmit)="salvarChecklist(f)" class="animated fadeInUp"-->
+  <form #f="ngForm" novalidate>
+      <ion-list class="space">
+          <h6 class="text-center" *ngIf="checklist.tipo_check == 'saida'" style="color: #248562; font-weight: bold;">
+              CHECKLIST DE SAÍDA</h6>
+          <h6 class="text-center" *ngIf="checklist.tipo_check == 'retorno'" style="color: red; font-weight: bold;">
+              CHECKLIST DE RETORNO</h6>
+          <div class="text-center" *ngIf="checklist.seguroPlus == '1'"
+              style="color: red; border: 2px solid #248562; font-size: 16px; font-weight: 900; border-radius: 5px; margin-bottom: 5px;">
+              Seguro Premium</div>
+          <div class="info">
+              <h6 class="bold">Locação: {{checklist.id_locacao}}</h6>
+              <ion-button class="button-outline ver" (click)="verChecklist()">Ver CheckList</ion-button>
+          </div>
+          <h6 class="bold">Cliente: {{locacao.nome_cli}}</h6>
+
+
+          <br>
+          <div *ngIf="checklist.tipo_car === 'moto' ">
+              <div class="row ">
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.documentos" name="documentos">
+                          <label class="form-check-label">Documento</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.antena" name="antena">
+                          <label class="form-check-label">Antena</label>
+                      </div>
+                  </div>
+
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.mata_cachorro" name="mata_cachorro">
+                          <label class="form-check-label">Mata Cachorro</label>
+                      </div>
+                  </div>
+
+                  <div class="col-6 form-col form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo" [(ngModel)]="checklist.bau"
+                              name="bau">
+                          <label class="form-check-label">Baú</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.sirene" name="sirene">
+                          <label class="form-check-label">Sirene</label>
+                      </div>
+                  </div>
+
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.lampada_sirene" name="lampada_sirene">
+                          <label class="form-check-label">Lâmpada Sirene</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.giroflex_traseiro" name="giroflex_traseiro">
+                          <label class="form-check-label">Giroflex Trazeiro</label>
+                      </div>
+                  </div>
+
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.giroflex_dianteiro" name="giroflex_dianteiro">
+                          <label class="form-check-label">Giroflex Dianteiro</label>
+                      </div>
+                  </div>
+                  <br>
+
+
+                  <div class="col-6 form-col">
+                      <ion-label>KM ANTERIOR</ion-label>
+                      <ion-input [readonly]="true" class="form-control" type="number"
+                          [(ngModel)]="checklist.oleo_km_car" name="oleo_km_car" placeholder="KM ANTERIOR" required>
+                      </ion-input>
+
+                  </div>
+                  <div class="col-6 form-col">
+                      <ion-label>KM ATUAL</ion-label>
+                      <ion-input class="form-control" type="number" [(ngModel)]="checklist.km_check" name="km_check"
+                          placeholder="KM ATUAL" required></ion-input>
+                      <div
+                          [hidden]="f.controls['km_check'] && (f.controls['km_check'].valid || (f.controls['km_check'].pristine && !isSubmitted))">
+                          <p class="controls-invalid"><b>Quilometragem é obrigatório</b></p>
+                      </div>
+                  </div>
+                  <div class="col-12 form-col">
+                      <div class="form-group">
+                          <label for="formControlRange">Gasolina {{checklist.gasolina}}%</label>
+                          <input type="range" class="form-control-range" [(ngModel)]="checklist.gasolina"
+                              name="gasolina" min="0" max="100" step="0.5" required>
+                      </div>
+                      <div
+                          [hidden]="f.controls['gasolina'] && (f.controls['gasolina'].valid || (f.controls['gasolina'].pristine && !isSubmitted))">
+                          <p class="controls-invalid"><b>Gasolina é obrigatório</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!------------------------------------------------------------------------------->
+
+          <div *ngIf="checklist.tipo_car === 'carro' ">
+              <div class="row ">
+
+                  <!-- <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.chavereserva" name="chavereserva">
+                          <label class="form-check-label">chave reserva</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.catalizador" name="catalizador">
+                          <label class="form-check-label">catalizador</label>
+                      </div>
+                  </div>-->
+
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                          [(ngModel)]="checklist.tapetes" name="tapetes">
+                          <label class="form-check-label">Documento</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.documentos" name="documentos">
+                          <label class="form-check-label">tapetes</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-6 form-col form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo" [(ngModel)]="checklist.som"
+                              name="som">
+                          <label class="form-check-label">Som</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.calotas" name="calotas">
+                          <label class="form-check-label">Calotas</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.estepe" name="estepe">
+                          <label class="form-check-label"> Estepe</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.chave_roda" name="chave_roda">
+                          <label class="form-check-label"> Chave roda</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.macaco" name="macaco">
+                          <label class="form-check-label"> Macaco</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.triangulo" name="triangulo">
+                          <label class="form-check-label"> Triângulo</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.simbolo" name="simbolo">
+                          <label class="form-check-label"> Adesivo</label>
+                      </div>
+                  </div>
+                  <div class="col-6 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.antena" name="antena">
+                          <label class="form-check-label"> Antena</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-12 form-col">
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input form-check-tipo"
+                              [(ngModel)]="checklist.manual" name="manual">
+                          <label class="form-check-label"> Manual</label>
+                      </div>
+                  </div>
+                  <!---->
+                  <div class="col-6 form-col">
+                      <ion-label>KM ANTERIOR</ion-label>
+                      <ion-input [readonly]="true" class="form-control" type="number"
+                          [(ngModel)]="checklist.oleo_km_car" name="oleo_km_car" placeholder="KM ANTERIOR" required>
+                      </ion-input>
+
+                  </div>
+                  <div class="col-6 form-col">
+                      <ion-label>KM ATUAL</ion-label>
+                      <ion-input class="form-control" type="number" [(ngModel)]="checklist.km_check" name="km_check"
+                          placeholder="KM ATUAL" required></ion-input>
+                      <div
+                          [hidden]="f.controls['km_check'] && (f.controls['km_check'].valid || (f.controls['km_check'].pristine && !isSubmitted))">
+                          <p class="controls-invalid"><b>Quilometragem é obrigatório</b></p>
+                      </div>
+                  </div>
+                  <div class="col-12 form-col">
+                      <div class="form-group">
+                          <label for="formControlRange">Gasolina {{checklist.gasolina}}%</label>
+                          <input type="range" class="form-control-range" [(ngModel)]="checklist.gasolina"
+                              name="gasolina" min="0" max="100" step="0.5" required>
+                      </div>
+                      <div
+                          [hidden]="f.controls['gasolina'] && (f.controls['gasolina'].valid || (f.controls['gasolina'].pristine && !isSubmitted))">
+                          <p class="controls-invalid"><b>Gasolina é obrigatório</b></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+          <div class="card" *ngIf="listaItens !== null">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th scope="col">Descrição</th>
+                          <th scope="col" *ngIf="checklist.tipo_check == 'retorno'">Valor</th>
+                          <th scope="col" *ngIf="checklist.tipo_check == 'retorno'">Qtd</th>
+                          <th scope="col" *ngIf="checklist.tipo_check == 'retorno'">Total</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let item of listaItens; let i = index" (ionChange)="calculateTotal()">
+                      <tr>
+                          <td>{{item.descricao_ava}}</td>
+                          <td *ngIf="checklist.tipo_check == 'retorno'">{{item.valor_ava_rela |
+                              currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
+                          <td *ngIf="item.quantidade">{{item.quantidade}}</td>
+                          <td *ngIf="checklist.tipo_check == 'retorno'"> {{getValor(item) |
+                              currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
+                          <td>
+                              <button type="button" class="btn btn-danger btn-sm" (click)="deleteAvarias(i)">
+                                  <ion-icon color="light" name="trash"></ion-icon>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <div *ngIf="item.obs != '' ">
+                              <span style="padding-left: 5px; color: blue; font-size: 16px;"><b>OBSERVAÇÃO</b></span>
+                              <textarea class="form-control " rows="3">{{item.obs}}</textarea>
+                          </div>
+                      </tr>
+                  </tbody>
+              </table>
+              <div style="padding-left: 40%;" *ngIf="checklist.tipo_check == 'retorno'  "> {{calculateTotal() }}</div>
+              <span class="text-center" *ngIf="checklist.tipo_check == 'retorno' "><b
+                      style=" font-size: 16px; color: #000;">Total &nbsp;{{valorTotalAval |
+                      currency:'BRL':'symbol':'0.2-2':'pt'}}</b></span>
+          </div>
+
+
+          <ion-list>
+              <div class="autocomplete">
+                  <div>
+                      <ion-input style="border: 2px solid #248562; border-radius: 5px;" type="text"
+                          [(ngModel)]="textoBuscar" name="textoBuscar" [ngModelOptions]="{standalone: true}"
+                          (ionChange)="search()" placeholder="Pesquisar avarias" debounce=500>
+                      </ion-input>
+                  </div>
+
+                  <div class="row" *ngFor="let item of countries"
+                      style="border-bottom: 1px solid  #000; padding-top: 10px !important;">
+                      <div class="col-4">
+                          <b style="font-size: 9px; color: #000; font-weight: 900">{{item.descricao_ava}}</b>
+                      </div>
+                      <div class="col-2">
+                          <div class="py-1">
+                              <ion-checkbox [(ngModel)]="item.selecionado" [ngModelOptions]="{standalone: true}"
+                                  value="" (ionChange)="checkItens()"></ion-checkbox>
+                          </div>
+                      </div>
+                      <div class="col-3">
+                          <b style="font-size: 10px; color: green; font-weight: 900"> R$:{{item.valor_ava_rela}}</b>
+                      </div>
+                      <div class="col-3" *ngIf="item.selecionado === true">
+                          <select class="form-control" [(ngModel)]="item.quantidade"
+                              [ngModelOptions]="{standalone: true}">
+                              <option *ngFor="let lista of listaItensQtd">{{lista}}</option>
+                          </select>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group">
+                              <textarea class="form-control area" id="exampleFormControlTextarea1" rows="4"
+                                  placeholder="Descreva aqui as observações da avaria" [(ngModel)]="item.obs"
+                                  name="obs"></textarea>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </ion-list>
+
+
+
+          <h5 ion-text color="primary" class="bold">Fotos</h5>
+          <div class="card round">
+
+              <div class="row">
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('frente')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemFrenteChecked" class="pull-right"></ion-icon>
+                          <!-- <button ion-button color="danger" *ngIf="imagemFrente" (click)="deletePhoto('frente')">
+          </button> -->
+                      </ion-card>
+                      <ion-card class="block ">
+                          <ion-thumbnail>
+                              <img [src]="imagemFrente || 'assets/imgs/frente.png' " />
+                          </ion-thumbnail>
+
+                      </ion-card>
+                  </div>
+
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('lateral1')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemLateral1Checked" class="pull-right"></ion-icon>
+                      </ion-card>
+                      <ion-card class="block text-center">
+                          <ion-thumbnail>
+                              <img [src]="imagemLateral1 || 'assets/imgs/lateral1.png'" />
+                          </ion-thumbnail>
+                      </ion-card>
+                  </div>
+
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('traseira')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemTraseiraChecked" class="pull-right"></ion-icon>
+                      </ion-card>
+                      <ion-card class="block">
+                          <ion-thumbnail>
+                              <img [src]="imagemTraseira || 'assets/imgs/traseira.png'" />
+                          </ion-thumbnail>
+                      </ion-card>
+                  </div>
+
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('lateral2')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemLateral2Checked" class="pull-right"></ion-icon>
+                      </ion-card>
+                      <ion-card class="block">
+                          <ion-thumbnail>
+                              <img [src]="imagemLateral2 || 'assets/imgs/lateral2.png'" />
+                          </ion-thumbnail>
+
+                      </ion-card>
+                  </div>
+
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('documento')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemDocumentoChecked" class="pull-right"></ion-icon>
+                      </ion-card>
+                      <ion-card class="block">
+                          <ion-thumbnail>
+                              <img [src]="imagemDocumento || 'assets/imgs/documento.png'" />
+                          </ion-thumbnail>
+
+                      </ion-card>
+                  </div>
+
+                  <div class="col-4">
+                      <ion-card class="block text-center">
+                          <ion-button color="primary" (click)="takePhoto('avaria')">
+                              <ion-icon name="camera"></ion-icon>
+                          </ion-button>
+                          <ion-icon style="font-size: 40px;color: green" name="checkmark-circle"
+                              *ngIf="imagemAvariaChecked" class="pull-right"></ion-icon>
+                      </ion-card>
+                      <ion-card class="block">
+                          <ion-thumbnail>
+                              <img [src]="imagemAvaria || 'assets/imgs/avarias.png'" />
+                          </ion-thumbnail>
+
+                      </ion-card>
+                  </div>
+              </div>
+
+          </div>
+          <h5 ion-text color="primary" class="bold">Assinaturas</h5>
+          <div class="card round text-center">
+              <img [src]="image || ''" />
+              <hr>
+              <ion-button color="success" (click)="assinaturaCliente(locacao.id_cli)">
+                  <span style="font-size: 11px;"> Ass Cliente: {{locacao.nome_cli}}</span>
+
+              </ion-button>
+          </div>
+          <div class="card round text-center" *ngFor="let condutor of condutores">
+              <img [src]="image2[condutor.id_cdt] || ''" />
+              <hr>
+              <ion-button color="success" (click)="assinaturaCondutor(condutor.id_cdt)">
+                  <span style="font-size: 10px;">
+                      Ass Condutor: {{condutor.nome_cdt}}
+                  </span>
+              </ion-button>
+          </div>
+          <h5 ion-text color="primary" class="bold">Assinaturas do Motorista Guincho</h5>
+          <div class="card round text-center">
+              <img [src]="image3 || ''" />
+              <hr>
+              <ion-button color="success" (click)="assinaturaGuincho(usuario)">
+                  <span style="font-size: 11px;"> Ass Motorista Guincho: {{nome_usu}}</span>
+
+              </ion-button>
+          </div>
+
+          <div class="form-bottom text-center">
+              <br>
+              <ion-button color="primary" block (click)="salvarChecklist()">
+                  Finalizar
+              </ion-button>
+              <br>
+              <div class="clear"></div>
+          </div>
+      </ion-list>
+  </form>
+</ion-content>

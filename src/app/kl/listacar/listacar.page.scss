@@ -1,0 +1,35 @@
+.titulo{
+    width: 100%;
+}
+.meio{
+   height: 50px;
+}
+.main{
+   display: flex;
+   flex-direction: column;
+}
+ion-card-title{
+   text-align: right;
+}
+.ng-progrees-bar{
+   margin-top: 88px;
+}
+.fab{
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+.qtdCar{
+   margin-top: 30px;
+}
+.bt{
+   margin-top: 10px;
+   margin-left: 10px;
+}
+.btcam{
+   background-color: #fff;
+   padding: 3px;
+}
+.manutencao{
+   color: crimson;
+}

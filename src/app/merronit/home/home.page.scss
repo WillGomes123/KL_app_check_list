@@ -1,0 +1,35 @@
+.card-box {
+    margin: 10px !important;
+}
+
+.btn-procurar {
+    width: 95%;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.btn-box {
+    width: 150px;
+}
+
+.img-uber>img {
+    left: 90%;
+    top: 5px;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.bg-light-danger {
+    background-color: rgba(251, 175, 190, 0.5) !important;
+}
+
+.gradient-lovekiss {
+    background: #ff0000;
+    background: -webkit-linear-gradient(45deg, #ff0000, #ffb199) !important;
+    background: linear-gradient(45deg, #ff0000 0%, #ffb199 100%) !important;
+}
+
+.icon {
+    width: 40px !important;
+    height: 40px !important;
+}

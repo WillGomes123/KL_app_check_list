@@ -1,0 +1,109 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title class="text-center">Fazer Login</ion-title>
+    </ion-toolbar>
+    <ion-segment [(ngModel)]="tipoLogin">
+        <ion-segment-button value="kl" class="kl" (click)="changeTheme('autumn')">
+            <ion-label>KL</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="merronit" class="merronit" (click)="changeTheme('neon')">
+            <ion-label>MERRONIT</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<ion-content>
+
+    <div class="login-section ion-padding" *ngIf="tipoLogin === 'kl'">
+        <form novalidate #f="ngForm" class="animated fadeInUp">
+            <div class="login-form ion-padding">
+                <div>
+                    <h6>Logar com a KL</h6>
+                </div>
+
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label class="ion-text-wrap" position="floating">
+                            <ion-icon name="person"></ion-icon>Login
+                        </ion-label>
+                        <ion-input type="text" placeholder="Login" [(ngModel)]="inputs.login" name="login" id="login"
+                            #login="ngModel" required></ion-input>
+
+                    </ion-item>
+                    <div
+                        [hidden]="f.controls['login'] && (f.controls['login'].valid || (f.controls['login'].pristine && !isSubmitted))">
+                        <p class="controls-invalid"><b>Login é obrigatório</b></p>
+                    </div>
+                </div>
+                <!--********************-->
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label class="ion-text-wrap" position="floating">
+                            <ion-icon name="lock-closed-outline"></ion-icon>Senha
+                        </ion-label>
+                        <ion-input type="{{ passwordtype }}" placeholder="Senha" [(ngModel)]="inputs.senha" name="senha"
+                            #senha="ngModel" required></ion-input>
+                        <ion-button class="icon-btn" slot="end" (click)="managePassword()">
+                            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                    <div
+                        [hidden]="f.controls['senha'] && (f.controls['senha'].valid || (f.controls['senha'].pristine && !isSubmitted))">
+                        <p class="controls-invalid"><b>Senha é obrigatório</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="button text-center" *ngIf="isLoggin === false">
+                <ion-button class="butao" (click)="onSubmitKL()">Login</ion-button>
+            </div>
+        </form>
+    </div>
+
+    <div class="login-section ion-padding" *ngIf="tipoLogin === 'merronit'">
+        <form novalidate #f="ngForm" class="animated fadeInUp">
+            <div class="login-form ">
+                <div>
+                    <h6>Logar com a MERRONIT</h6>
+                </div>
+
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label class="ion-text-wrap" position="floating">
+                            <ion-icon name="person"></ion-icon>Login
+                        </ion-label>
+                        <ion-input type="text" placeholder="Login" [(ngModel)]="inputs.login" name="login" id="login"
+                            #login="ngModel" required></ion-input>
+                    </ion-item>
+                    <div
+                        [hidden]="f.controls['login'] && (f.controls['login'].valid || (f.controls['login'].pristine && !isSubmitted))">
+                        <p class="controls-invalid"><b>Login é obrigatório</b></p>
+                    </div>
+                </div>
+                <!--********************-->
+                <div class="form-input">
+
+                    <ion-item>
+                        <ion-label class="ion-text-wrap" position="floating">
+                            <ion-icon name="lock-closed-outline"></ion-icon>Senha
+                        </ion-label>
+                        <ion-input type="{{ passwordtype }}" placeholder="Senha" [(ngModel)]="inputs.senha" name="senha"
+                            #senha="ngModel" required></ion-input>
+                        <ion-button color="danger" class="icon-btn" slot="end" (click)="managePassword()">
+                            <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                    <div
+                        [hidden]="f.controls['senha'] && (f.controls['senha'].valid || (f.controls['senha'].pristine && !isSubmitted))">
+                        <p class="controls-invalid"><b>Senha é obrigatório</b></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="button text-center" *ngIf="isLoggin === false ">
+                <ion-button color="danger" class="butao" (click)="onSubmitMerronit()">Login</ion-button>
+            </div>
+        </form>
+    </div>
+
+
+</ion-content>

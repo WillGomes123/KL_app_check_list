@@ -1,0 +1,87 @@
+h4 {
+    font-family: Arial, Helvetica, sans-serif !important;
+    color: #000 !important;
+}
+
+.form-check-tipo {
+    width: 18px !important;
+    height: 18px !important;
+    background-color: #ffffff;
+}
+
+.space {
+    margin: 10px !important;
+}
+
+.form-col {
+    padding-bottom: 5px !important;
+}
+
+.color-block {
+    height: 40px;
+}
+
+td {
+    color: #000 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+}
+
+.block {
+    position: block !important;
+}
+
+.deleteIcon {
+    position: absolute !important;
+    color: #ffffff !important;
+    margin-left: 80% !important;
+}
+
+.deleteIcon:before {
+    font-size: 30px !important;
+}
+
+.color {
+    color: #000 !important;
+}
+
+.gasolina {
+    padding-left: 50%;
+}
+
+.controls-invalid {
+    color: red;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.textarea {
+    width: 100%;
+}
+
+ion-thumbnail {
+    width: 100px !important;
+    height: 100px !important;
+}
+.info{
+    background-color: rgb(235, 245, 243);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    h6{
+        padding: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .bold{
+        font-weight: bold;
+    }
+}
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+.ver{
+    font-weight: bold;
+}

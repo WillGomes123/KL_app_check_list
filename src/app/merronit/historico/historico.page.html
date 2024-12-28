@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/merronit_home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Histórico</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="card card-box" margin margin-top *ngFor="let checklist of checklists">
+        <div>
+            <div> Carro: <b>{{ checklist.placa_car }}</b> - {{ checklist.modelo_car }} <span style="color: red" *ngIf="checklist.deletado == '1'">(CheckList Refeito)</span></div>
+            <div>Momento: {{ checklist.tipo_checklist }}</div>
+            <div>
+                <ion-button (click)="verChecklist(checklist.id_check_list)">Ver CheckList</ion-button>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>

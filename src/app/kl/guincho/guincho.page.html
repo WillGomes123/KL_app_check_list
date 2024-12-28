@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Guincho KL</ion-title>
+      <ion-buttons slot="primary" (click)="contar()">
+       
+      </ion-buttons>
+      <ion-buttons slot="primary" (click)="sair()">
+          <!--contar carros-->
+          <ion-button color="light">
+              Sair
+              <ion-icon name="power"></ion-icon>
+          </ion-button>
+
+
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="atualiza()">
+      <ion-refresher-content pullingText="Deslise par  a baixo para atualizar" refreshingSpinner="circles"
+          refreshingText="Atualizando...">
+      </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="full-width">
+      <div class="row">
+          <div class="col-9">
+              <ion-item tappable class="border-bottom">
+                  <ion-icon name="car"></ion-icon>
+                  <ion-input type="text" [(ngModel)]="placa_car" name="placa_car" placeholder="Placa do Veículo">
+                  </ion-input>
+              </ion-item>
+          </div>
+          <div class="col-3">
+              <ion-button class="round" color="primary" (click)="pesquisarLocacao()">
+                  <ion-icon name="search"></ion-icon>
+              </ion-button>
+          </div>
+      </div>
+  </ion-card>
+
+  <!--description-->
+  <div class="text-center" *ngIf="ativo === false">
+      <h4 ion-text color="primary" class="bold">Locações</h4>
+      <p ion-text>As Locações pesquisadas aparecem abaixo:</p>
+  </div>
+
+  <!--booking form-->
+  <div class="booking-form round container-fluid area no-border" *ngFor="let item of locacoes">
+      <!-- List of Text Items -->
+      <div class="card">
+          <div class="card-body gradient-quepal">
+              <h4><strong>Locação: </strong>{{item.id_Loc}}</h4>
+              <h6 *ngIf="item.titulo_pla !== null || item.titulo_pla === '' " class="text-dark bold"><strong>
+                  </strong>{{item.titulo_pla}} </h6>
+              <h6 *ngIf="item.seguroPlus === '1' " class="text-dark bold"><strong>Seguro: </strong><span
+                      style="color: #000; font-size: 16px; font-weight: 900;">Premium</span></h6>
+              <h6 class="text-dark bold"><strong>Nome:</strong> {{item.nome_cli}}</h6>
+              <h6 class="text-dark bold"><strong>Cpf:</strong> {{item.cpf_cli}}</h6>
+              <ion-fab vertical="top" horizontal="end" slot="fixed">
+                  <ion-fab-button (click)="verTodosChecklist(item.id_Loc)">
+                      <ion-icon class="icon" name="filter-circle-outline"></ion-icon>
+                  </ion-fab-button>
+              </ion-fab>
+          </div>
+      </div>
+
+      <div class="border-bottom">
+          <ion-list class="main">
+              <ion-item color="none" class="ite" id="home-list-item4 ">
+                  <ion-thumbnail class="foto" item-left>
+                      <img [src]="item.foto || 'assets/imgs/user-male.jpg'" />
+                  </ion-thumbnail> &nbsp;
+                  <span>
+                      <strong
+                          style="font-size: 12px !important">{{item.modelo_car}}&nbsp;-&nbsp;{{item.cor_car}}</strong>
+                      <br />
+                      Placa: <b style="font-size: 12px !important">{{item.placa_car}}</b> <br />
+                      <!--LOJAS PRAÇA 14-->
+                      <b *ngIf="item.id_loj == 37 || item.id_loj == 8 || item.id_loj == 18  "
+                          style="color: green; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!--LOJAS BOA VISTA-->
+                      <b *ngIf="item.id_loj == 9 || item.id_loj == 3 || item.id_loj == 38 "
+                          style="color: blue; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!--LOJAS TORQUATOS-->
+                      <b *ngIf="item.id_loj == 47 || item.id_loj == 46 || item.id_loj == 48 "
+                          style="color: cadetblue; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!--LOJA KL FREEDOM-->
+                      <b *ngIf="item.id_loj == 5 "
+                          style="color: #248562; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!-- LOJAS CONSTANTINO-->
+                      <b *ngIf="item.id_loj == 43 || item.id_loj == 44 || item.id_loj == 45"
+                          style="color: orangered; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!-- LOJAS LOCARAPIDO-->
+                      <b *ngIf="item.id_loj == 56 || item.id_loj == 57 || item.id_loj == 58"
+                          style="color: #94c219; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                      <!-- LOJAS LOCARAPIDO-->
+                      <b *ngIf="item.id_loj == 55"
+                          style="color: #1a88b9; font-size: 14px; font-weight: 900;">{{item.titulo_loj}}</b>
+                  </span>
+                  <!--*ngIf="item.uber === 0"-->
+                  <div *ngIf="item.uber === '1' " class="img-uber">
+                      <img src="assets/imgs/uber.png" alt="image" />
+                  </div>
+                  <div *ngIf="item.uber === '0' " class="img-uber">
+                      <img src="assets/imgs/favicon.png" />
+                  </div>
+              </ion-item>
+              <div class="btns">               
+
+                  <ion-button  (click)="fazerChecklist(item, 'guincho')">
+                      <ion-icon name="chevron-down-outline"></ion-icon>
+                      <b>Guincho</b>
+                  </ion-button>
+                  <ion-button color="danger" (click)="fazerChecklist(item, 'guincho_saida')">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                    <b>Guincho Saida</b>
+                </ion-button>
+
+                 
+
+              </div>
+          </ion-list>
+      </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <!-- <ion-fab-button (click)="locacaoDia()"> -->
+          <ion-fab-button (click)="locacaoDia()">
+          
+          <ion-icon name="sync-outline"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

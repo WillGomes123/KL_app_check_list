@@ -1,0 +1,72 @@
+ion-card {
+    margin-right: 10px;
+}
+
+.btn-procurar {
+    width: 95%;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.btn-box {
+    width: 150px;
+}
+
+.img-uber>img {
+    left: 90%;
+    top: 5px;
+    position: absolute;
+    transform: translateX(-50%);
+    border-radius: 5px;
+
+}
+
+h6 {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 14px !important;
+    color: #000 !important;
+}
+
+.gradient-quepal {
+    background: #4b9093;
+   // background: -webkit-linear-gradient(45deg, #248562, #248562) !important;
+    background: linear-gradient(45deg, #f4f7f8, #248562) !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.area{
+    margin-bottom: 20px;
+}
+
+.icon {
+    width: 40px !important;
+    height: 40px !important;
+}
+.btns{
+    display: flex;
+    justify-content: space-between;
+}
+.bt{
+    display: flex;
+    flex-direction: column;
+}
+.main{
+    background-color: #f4f7f8;
+    margin-top: 10px;
+}
+.foto{
+    height: 80px;
+    width: 80px;
+    img{
+        border-radius: 5px;
+
+    }
+}
+.ite{
+    background-color: #f4f7f8;
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

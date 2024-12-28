@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/kl_locacao"></ion-back-button>
+  </ion-buttons>
+    <ion-title>LOJAS</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="main">
+    <div class="kl" (click)="LoadingCarros2()">
+      <img src="../../../assets/imgs/icon3.png" />
+    </div>
+    <div (click)="LoadingCarrosBest2()" class="best">
+      <img src="../../../assets/imgs/iconebest.png" />
+    </div>
+    <!-- <ion-button (click)="LoadingCarros2(data)">
+      <ion-icon slot="start" name="car"></ion-icon>
+      KL RENT A CAR
+    </ion-button>
+
+    <ion-button>
+      <ion-icon slot="start" name="star"></ion-icon>
+      BEST CAR
+    </ion-button>-->
+  </div>
+
+
+</ion-content>

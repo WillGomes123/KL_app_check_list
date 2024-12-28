@@ -1,0 +1,136 @@
+<<<<<<< HEAD
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-icon name="arrow-back"> </ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>CARROS KL</ion-title>
+    <ion-buttons slot="primary" (click)="LoadingCarros()">
+      <ion-button>
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-input placeholder="PLACA" [(ngModel)]="placa" name="placa"></ion-input>
+   <button class="btcam" color="primary"  clear item-right><ion-icon color="primary"></ion-icon></button>
+
+  </ion-item>
+  <div class="fab">
+    <ion-button class="bt" (click)="buscaCar()" color="primary">BUSCAR</ion-button>
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 5b2d9bd30732d6947647a75b7b1fd67b637242b4
+  </div>
+
+
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let carros of car">
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="contaCar2(carros)">
+          Contar +
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item class="main">
+        <div class="titulo">
+          <ion-card-subtitle>{{carros.nome_loj_esta}}</ion-card-subtitle>
+        </div><br>
+        <div class="meio">
+          <ion-label>
+            <ion-card-title><strong><ion-icon class="manutencao" name="hammer" *ngIf="carros.status_car == 'oficina'"></ion-icon>&nbsp;{{carros.placa_car}}</strong></ion-card-title>
+            <ion-card-subtitle>{{carros.modelo_car}} - {{carros.cor_car}}</ion-card-subtitle>
+          </ion-label>
+        </div>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="primary" (click)="AtualizaCar(carros)">
+          Contar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab class="qtdCar" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <label>{{qtdCar}}</label>
+    </ion-fab-button>
+  </ion-fab>
+
+=======
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-icon name="arrow-back"> </ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>CARROS KL</ion-title>
+    <ion-buttons slot="primary" (click)="LoadingCarros()">
+      <ion-button>
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-input placeholder="PLACA" [(ngModel)]="placa" name="placa"></ion-input>
+   <button class="btcam" color="primary"  clear item-right><ion-icon color="primary"></ion-icon></button>
+
+  </ion-item>
+  <div class="fab">
+    <ion-button class="bt" (click)="buscaCar()" color="primary">BUSCAR</ion-button>
+  </div>
+
+
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let carros of car">
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="contaCar2(carros)">
+          Contar +
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item class="main">
+        <div class="titulo">
+          <ion-card-subtitle>{{carros.nome_loj_esta}}</ion-card-subtitle>
+        </div><br>
+        <div class="meio">
+          <ion-label>
+            <ion-card-title><strong><ion-icon class="manutencao" name="hammer" *ngIf="carros.status_car == 'oficina'"></ion-icon>&nbsp;{{carros.placa_car}}</strong></ion-card-title>
+            <ion-card-subtitle>{{carros.modelo_car}} - {{carros.cor_car}}</ion-card-subtitle>
+          </ion-label>
+        </div>
+      </ion-item>
+
+
+      <ion-item-options side="end">
+        <ion-item-option color="primary" (click)="AtualizaCar(carros)">
+          Contar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab class="qtdCar" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <label>{{qtdCar}}</label>
+    </ion-fab-button>
+  </ion-fab>
+
+>>>>>>> 5f5c5f479407f3a95504aa5b9fa29ab910c735dc
+</ion-content>

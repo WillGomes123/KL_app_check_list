@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/kl_locacao"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Atendimento</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="div-box">
+        <ion-card class="loca">
+            <h4>LOCATÁRIO</h4>
+            <ion-item>
+                <ion-thumbnail item-left>
+                    <img [src]="locacao.foto || 'assets/imgs/user-male.jpg'" />&nbsp; &nbsp;
+                </ion-thumbnail>
+                <ion-label>
+                    <h5 color="primary"><strong>LOC: {{locacao.nome_cli}} </strong></h5>
+                    <h6 color="primary"><strong>CNH: {{locacao.habilitacao_cli}} </strong></h6>
+                </ion-label>
+            </ion-item>
+
+
+            <ion-list *ngFor="let lista of listaCondutores">
+                <h4>CONDUTOR</h4>
+                <ion-item>
+                    <ion-thumbnail item-left>
+                        <img [src]="lista.foto || 'assets/imgs/user-male.jpg'" />
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h5><strong>COND: {{lista.nome_cdt}} </strong></h5>
+                        <h6><strong>CNH: {{lista.habilitacao_cdt}}</strong></h6>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+
+
+        <div>
+
+            <ion-card>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Procedimento</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="procedencia" name="procedencia">
+                        <ion-select-option value="amortizacao">Amortização</ion-select-option>
+                        <ion-select-option value="trocar_carro">Trocar Carro</ion-select-option>
+                        <ion-select-option value="trocar_condutor">Trocar Condutor</ion-select-option>
+                        <ion-select-option value="fechamento">Fechar Contrato</ion-select-option>
+                        <ion-select-option value="avaria">Avaria</ion-select-option>
+                        <ion-select-option value="outros">Outros</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-card>
+            <ion-card>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Adesivo</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="adesivo" name="adesivo">
+                        <ion-select-option value="0">Com Adesivo</ion-select-option>
+                        <ion-select-option value="1">Sem Adesivo</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-card>
+            <ion-card>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Última Km </ion-label>
+                    <ion-input type="number" [(ngModel)]="locacao.oleo_km_car" [readonly]="true" placeholder="Quilometragem atual"></ion-input>
+                </ion-item>
+            </ion-card>
+
+            <ion-card>
+                <ion-item>
+                    <ion-label color="primary" position="floating">Km atual</ion-label>
+                    <ion-input type="number" [(ngModel)]="km_carro" name="km_carro" (ionBlur)="pesquisarKM()"></ion-input>
+                </ion-item>
+            </ion-card>
+
+            <ion-card>
+                <ion-item>
+                    <ion-textarea rows="6" [(ngModel)]="observacao" cols="15" placeholder="Observações"></ion-textarea>
+                </ion-item>
+            </ion-card>
+
+
+            <ion-button expand="block" color="primary" class="round" tappable [disabled]="!locacao" (click)="salvarAtendimento()">
+                <ion-icon name="save"></ion-icon> Salvar
+            </ion-button>
+            <br />
+        </div>
+    </div>
+</ion-content>

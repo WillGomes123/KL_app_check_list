@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>ASSINATURA</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <div class="signature">
+        <signature-pad #signature [options]="signaturePadOptions" (drawStart)="drawStart()" (drawEnd)="drawComplete()">
+        </signature-pad>
+    </div>
+    <div class="card">
+        <div class="row">
+            <div class="col-4"><button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button></div>
+            <div class="col-4"><button type="button" class="btn btn-light" (click)="limpar()">Limpar</button>
+            </div>
+            <div class="col-4"><button type="button" class="btn btn-success" (click)="salvar()">Salvar</button></div>
+        </div>
+    </div>
+</ion-content>

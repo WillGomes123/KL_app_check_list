@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Checklist KL</string>
+    <string name="title_activity_main">Checklist KL</string>
+    <string name="package_name">br.com.econe.checklist</string>
+    <string name="custom_url_scheme">br.com.econe.checklist</string>
+</resources>
