@@ -61,11 +61,6 @@ export class ChecklistPage {
 
   }
 
-  public form = [
-    { val: 'Pepperoni', isChecked: true },
-    { val: 'Sausage', isChecked: false },
-    { val: 'Mushroom', isChecked: false },
-  ];
 
   ionViewDidEnter() {
     this.apiKlService.getStorageKL("check").then((user: any) => {
@@ -90,22 +85,32 @@ export class ChecklistPage {
       this.params.id_usuario = this.usuario;
       this.params.tipo_check = this.checklist.tipo_check;
       this.params.id_carro = this.checklist.id_carro;
+
       //console.log(this.params);
-      this.apiKlService.getStorageKL("idCheck").then((value) => {
-        if (value === null) {
-          this.apiKlService.salvarChecklist(this.params).subscribe(data => {
-            if (data.status == false) {
+
+      this.apiKlService.getStorageKL("idCheck").then((value) => 
+        {
+        if (value === null) 
+          {
+          this.apiKlService.salvarChecklist(this.params).subscribe(data => 
+            {
+            if (data.status == false) 
+              {
               this.toastService.showError('Erro ao salvar o CheckList');
-            } else {
+              } else 
+               {
               this.id_checklist = data.id_checklist;
               this.checklist.id_checklist = data.id_checklist;
             }
           });
-        } else {
+        } else 
+        {
           this.id_checklist = value;
           this.checklist.id_checklist = value;
         }
       });
+
+      
       //pesquisa condutores
       this.apiKlService.pesquisarCondutores(this.checklist.id_locacao).subscribe((data) => {
         if (data.status != false) {
@@ -182,7 +187,8 @@ export class ChecklistPage {
       return this.valorTotalAval = total;
     });
   }
-
+  
+   
   async salvarChecklist() {
     this.isSubmitted = true;
     const loading = await this.loadingController.create({
@@ -228,6 +234,8 @@ export class ChecklistPage {
       this.toastService.showError("Preencher a Quilometragem");
     }
   }
+
+
 
   async takePhoto(tipo: string) {
     const fotoTirada = await this.apiKlService.tirarPhoto();
@@ -301,7 +309,7 @@ export class ChecklistPage {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
       // header: 'Confirm!',
-      message: 'Tem certeza que deseja excluir  essa avaria!',
+      message: 'Tem certeza que deseja excluir  essa avaria?',
       buttons: [
         {
           text: 'Não',
@@ -321,6 +329,9 @@ export class ChecklistPage {
     });
     await alert.present();
   }
+
+
+
 
   enviarAssinaturaCliente() {
     if (this.image != undefined || this.image != "" || this.image != null) {
@@ -344,6 +355,13 @@ export class ChecklistPage {
       });
     }
   }
+  isCheckListOk(): boolean{
+
+    return(
+      this.checklist.avarias.length() == 0
+      ) }
+  
+
 
   enviaAssinaturaCondutor() {
     //Salva assinatura dos condutores
@@ -359,6 +377,27 @@ export class ChecklistPage {
           momento_assinatura: this.checklist.tipo_check,
           id_checklist: this.id_checklist,
         };
+        
+      if (this.isCheckListOk()){
+        const dadosLiberacao = {
+          id_usuario: this.checklist.id_usuario,
+          id_locacao: this.checklist.id_locacao,
+          status: 'liberado',
+          observacao:'Cliente liberado, sem avarias'
+
+        };
+
+        this.apiKlService.liberacaoLocacao(dadosLiberacao).subscribe(
+          res=>{
+            if(res.status === true){
+                this.toastService.showSucess('Carro liberado com sucesso')
+            }
+            else{
+              this.toastService.showError('Erro no fechamento')
+            }
+          }
+        );
+      }
 
         console.log(JSON.stringify(data2));
         this.apiKlService.enviarImagen(data2).subscribe((data2: any) => {

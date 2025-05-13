@@ -113,6 +113,15 @@ export class ApiKlService {
   atualizarStatusChecklist(data: any) {
     return this.http.post<any>(this.url + 'checklist/atualiza_status_checklist', data, httpOptions);
   }
+   
+  liberacaoLocacao(data: any): Observable<any> {
+    return this.http.post<any>(
+      this.url + 'checklist/liberacao_locacao', // ajuste conforme o endpoint real
+      data,
+      httpOptions
+    );
+  }
+  
 
   historico_checklist(data: any) {
     return this.http.post<any>(this.url + 'checklist/historico_checklist', data, httpOptions);

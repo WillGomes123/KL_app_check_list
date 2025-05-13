@@ -1,6 +1,6 @@
 import { ModalController, NavController, Platform } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgSignaturePadOptions, SignaturePadComponent } from '@almothafar/angular-signature-pad';
+import { NgSignaturePadOptions, SignaturePadComponent } from '@almothafar/angular-signature-pad'; 
 import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 
