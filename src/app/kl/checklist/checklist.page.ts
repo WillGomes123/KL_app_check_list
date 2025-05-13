@@ -386,7 +386,7 @@ export class ChecklistPage {
           observacao:'Cliente liberado, sem avarias'
 
         };
-
+// teste api libercao
         this.apiKlService.liberacaoLocacao(dadosLiberacao).subscribe(
           res=>{
             if(res.status === true){
